@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dusk", "Dusk\Dusk.csproj", "{ACF36A9B-049A-4024-9B32-7835923E7514}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dusk.CodeAnalysis", "Dusk.CodeAnalysis\Dusk.CodeAnalysis.csproj", "{90D30E6F-F289-4142-AF55-58B2B86A67CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACF36A9B-049A-4024-9B32-7835923E7514}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACF36A9B-049A-4024-9B32-7835923E7514}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACF36A9B-049A-4024-9B32-7835923E7514}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACF36A9B-049A-4024-9B32-7835923E7514}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90D30E6F-F289-4142-AF55-58B2B86A67CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90D30E6F-F289-4142-AF55-58B2B86A67CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90D30E6F-F289-4142-AF55-58B2B86A67CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90D30E6F-F289-4142-AF55-58B2B86A67CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F39D2374-5F97-4BF9-A7B3-C4A6581D22A8}
+	EndGlobalSection
+EndGlobal
