@@ -72,48 +72,41 @@ namespace Dusk.CodeAnalysis
             return new SyntaxTree(_diagnostics, expression, endOfFile);
         }
 
-        private ExpressionSyntax.ExpressionSyntax ParseExpression()
-        {
-            return ParseTerm();
-        }
 
-        /// <summary>
-        /// Parses term integers -- + & -
-        /// </summary>
-        /// <returns></returns>
-        private ExpressionSyntax.ExpressionSyntax ParseTerm()
-        {
-            var left = ParseFactor();
-
-            while (Current.SyntaxKind == SyntaxKind.PlusToken ||
-                   Current.SyntaxKind == SyntaxKind.MinusToken)
-            {
-                var operatorToken = NextToken();
-                var right = ParseFactor();
-                left = new BinaryExpressionSyntax(left, operatorToken, right);
-            }
-
-            return left;
-        }
-
-        /// <summary>
-        /// Parse multiplacitive integers -- * & /
-        /// </summary>
-        /// <returns></returns>
-        private ExpressionSyntax.ExpressionSyntax ParseFactor()
+        private ExpressionSyntax.ExpressionSyntax ParseExpression(int parentPrecedence = 0)
         {
             var left = ParsePrimaryExpression();
 
-            while (Current.SyntaxKind == SyntaxKind.StarToken ||
-                   Current.SyntaxKind == SyntaxKind.SlashToken)
+            while (true)
             {
+                var precedence = GetBinaryOperatorPrecedence(Current.SyntaxKind);
+                if (precedence == 0 || precedence <= parentPrecedence)
+                    break;
+
                 var operatorToken = NextToken();
-                var right = ParsePrimaryExpression();
+                var right = ParseExpression(precedence);
                 left = new BinaryExpressionSyntax(left, operatorToken, right);
             }
-
             return left;
         }
+
+        private static int GetBinaryOperatorPrecedence(SyntaxKind kind)
+        {
+            switch (kind)
+            {
+                case SyntaxKind.PlusToken:
+                case SyntaxKind.MinusToken:
+                    return 1;
+
+                case SyntaxKind.StarToken:
+                case SyntaxKind.SlashToken:
+                    return 2;
+
+                default:
+                    return 0;
+            }
+        }
+
 
         private ExpressionSyntax.ExpressionSyntax ParsePrimaryExpression()
         {
