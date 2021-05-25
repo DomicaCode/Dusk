@@ -7,6 +7,5 @@ namespace Dusk.CodeAnalysis.ExpressionSyntax
 {
     public abstract class ExpressionSyntax : SyntaxNode
     {
-
     }
 }

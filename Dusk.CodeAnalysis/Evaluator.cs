@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Dusk.CodeAnalysis
 {
-    public class Evaluator
+    public sealed class Evaluator
     {
         private readonly ExpressionSyntax.ExpressionSyntax _root;
 
@@ -22,8 +22,9 @@ namespace Dusk.CodeAnalysis
 
         private int EvaluateExpression(ExpressionSyntax.ExpressionSyntax node)
         {
-            if (node is NumberExpressionSyntax numberExpression)
-                return (int)numberExpression.NumberToken.Value;
+            if (node is LiteralExpressionSyntax numberExpression)
+                return (int)numberExpression.LiteralToken.Value;
+
             if (node is BinaryExpressionSyntax binaryExpression)
             {
                 var left = EvaluateExpression(binaryExpression.Left);

@@ -7,6 +7,7 @@ namespace Dusk.CodeAnalysis.Syntax
 {
     public enum SyntaxKind
     {
+        // Tokens
         NumberToken,
         WhiteSpaceToken,
         PlusToken,
@@ -17,6 +18,8 @@ namespace Dusk.CodeAnalysis.Syntax
         OpenParenthesisToken,
         BadToken,
         EndOfFileToken,
+
+        // Expressions
         NumberExpression,
         BinaryExpression,
         ParenthesizedExpression

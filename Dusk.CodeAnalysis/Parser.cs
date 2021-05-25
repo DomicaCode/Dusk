@@ -7,7 +7,7 @@ using System.Text;
 namespace Dusk.CodeAnalysis
 {
 
-    class Parser
+    internal sealed class Parser
     {
         private SyntaxToken[] _tokens;
         private int _position;
@@ -54,7 +54,7 @@ namespace Dusk.CodeAnalysis
             return current;
         }
 
-        private SyntaxToken Match(SyntaxKind syntaxKind)
+        private SyntaxToken MatchToken(SyntaxKind syntaxKind)
         {
             if (Current.SyntaxKind == syntaxKind)
                 return NextToken();
@@ -63,18 +63,18 @@ namespace Dusk.CodeAnalysis
             return new SyntaxToken(syntaxKind, Current.Position, null, null);
         }
 
-        private ExpressionSyntax.ExpressionSyntax ParseExpression()
-        {
-            return ParseTerm();
-        }
-
         public SyntaxTree Parse()
         {
 
-            var expression = ParseTerm();
-            var endOfFile = Match(SyntaxKind.EndOfFileToken);
+            var expression = ParseExpression();
+            var endOfFile = MatchToken(SyntaxKind.EndOfFileToken);
 
             return new SyntaxTree(_diagnostics, expression, endOfFile);
+        }
+
+        private ExpressionSyntax.ExpressionSyntax ParseExpression()
+        {
+            return ParseTerm();
         }
 
         /// <summary>
@@ -121,12 +121,12 @@ namespace Dusk.CodeAnalysis
             {
                 var left = NextToken();
                 var expression = ParseExpression();
-                var right = Match(SyntaxKind.ClosedParenthesisToken);
+                var right = MatchToken(SyntaxKind.ClosedParenthesisToken);
                 return new ParenthesizedExpressionSytax(left, expression, right);
             }
 
-            var numberToken = Match(SyntaxKind.NumberToken);
-            return new NumberExpressionSyntax(numberToken);
+            var numberToken = MatchToken(SyntaxKind.NumberToken);
+            return new LiteralExpressionSyntax(numberToken);
         }
     }
 }

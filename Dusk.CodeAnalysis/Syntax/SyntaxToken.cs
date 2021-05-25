@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Dusk.CodeAnalysis.Syntax
 {
-    public class SyntaxToken : SyntaxNode
+    public sealed class SyntaxToken : SyntaxNode
     {
         public SyntaxToken(
             SyntaxKind syntaxKind,

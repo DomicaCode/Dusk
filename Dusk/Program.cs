@@ -1,14 +1,15 @@
 ﻿using Dusk.CodeAnalysis;
 using Dusk.CodeAnalysis.Syntax;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Dusk
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        #region Methods
+
+        private static void Main()
         {
             bool showTree = false;
 
@@ -34,16 +35,12 @@ namespace Dusk
 
                 if (showTree)
                 {
-                    var color = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.DarkGray;
 
                     Print(syntaxTree.Root);
 
-                    Console.ForegroundColor = color;
+                    Console.ResetColor();
                 }
-
-
-
 
                 if (syntaxTree.Diagnostics.Count == 0)
                 {
@@ -54,7 +51,6 @@ namespace Dusk
                 }
                 else
                 {
-                    var color = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.Red;
 
                     foreach (var diagnostic in syntaxTree.Diagnostics)
@@ -62,13 +58,12 @@ namespace Dusk
                         Console.WriteLine(diagnostic);
                     }
 
-                    Console.ForegroundColor = color;
+                    Console.ResetColor();
                 }
-
             }
         }
 
-        static void Print(SyntaxNode node, string indent = "", bool isLast = true)
+        private static void Print(SyntaxNode node, string indent = "", bool isLast = true)
         {
             var marker = isLast ? "└──" : "├──";
 
@@ -86,7 +81,7 @@ namespace Dusk
 
             Console.WriteLine();
 
-            indent += isLast ? "    " : "│    ";
+            indent += isLast ? "   " : "│    ";
 
             var lastChild = node.GetChildren().LastOrDefault();
 
@@ -95,6 +90,7 @@ namespace Dusk
                 Print(child, indent, child == lastChild);
             }
         }
-    }
 
+        #endregion Methods
+    }
 }

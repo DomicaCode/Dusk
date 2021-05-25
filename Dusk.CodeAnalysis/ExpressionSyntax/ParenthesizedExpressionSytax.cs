@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Dusk.CodeAnalysis.ExpressionSyntax
 {
-    sealed class ParenthesizedExpressionSytax : ExpressionSyntax
+    public sealed class ParenthesizedExpressionSytax : ExpressionSyntax
     {
         public ParenthesizedExpressionSytax(SyntaxToken openParenthesisToken, ExpressionSyntax expression, SyntaxToken closedParenthesisToken)
         {

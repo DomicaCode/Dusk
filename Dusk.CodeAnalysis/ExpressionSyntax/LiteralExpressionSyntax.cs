@@ -3,20 +3,20 @@ using System.Collections.Generic;
 
 namespace Dusk.CodeAnalysis.ExpressionSyntax
 {
-    sealed class NumberExpressionSyntax : ExpressionSyntax
+    public sealed class LiteralExpressionSyntax : ExpressionSyntax
     {
-        public NumberExpressionSyntax(SyntaxToken numberToken)
+        public LiteralExpressionSyntax(SyntaxToken literalToken)
         {
-            NumberToken = numberToken;
+            LiteralToken = literalToken;
         }
 
         public override SyntaxKind SyntaxKind => SyntaxKind.NumberExpression;
 
-        public SyntaxToken NumberToken { get; }
+        public SyntaxToken LiteralToken { get; }
 
         public override IEnumerable<SyntaxNode> GetChildren()
         {
-            yield return NumberToken;
+            yield return LiteralToken;
         }
     }
 }
