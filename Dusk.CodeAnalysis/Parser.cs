@@ -75,11 +75,25 @@ namespace Dusk.CodeAnalysis
 
         private ExpressionSyntax.ExpressionSyntax ParseExpression(int parentPrecedence = 0)
         {
-            var left = ParsePrimaryExpression();
+            ExpressionSyntax.ExpressionSyntax left;
+
+            var unaryOperatorPrecedence = Current.SyntaxKind.GetUnaryOperatorPrecedence();
+
+            if (unaryOperatorPrecedence != 0 && unaryOperatorPrecedence >= parentPrecedence)
+            {
+                var operatorToken = NextToken();
+                var operand = ParseExpression(unaryOperatorPrecedence);
+
+                left = new UnaryExpressionSyntax(operatorToken, operand);
+            }
+            else
+            {
+                left = ParsePrimaryExpression();
+            }
 
             while (true)
             {
-                var precedence = GetBinaryOperatorPrecedence(Current.SyntaxKind);
+                var precedence = Current.SyntaxKind.GetBinaryOperatorPrecedence();
                 if (precedence == 0 || precedence <= parentPrecedence)
                     break;
 
@@ -88,23 +102,6 @@ namespace Dusk.CodeAnalysis
                 left = new BinaryExpressionSyntax(left, operatorToken, right);
             }
             return left;
-        }
-
-        private static int GetBinaryOperatorPrecedence(SyntaxKind kind)
-        {
-            switch (kind)
-            {
-                case SyntaxKind.PlusToken:
-                case SyntaxKind.MinusToken:
-                    return 1;
-
-                case SyntaxKind.StarToken:
-                case SyntaxKind.SlashToken:
-                    return 2;
-
-                default:
-                    return 0;
-            }
         }
 
 

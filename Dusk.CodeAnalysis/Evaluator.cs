@@ -25,6 +25,19 @@ namespace Dusk.CodeAnalysis
             if (node is LiteralExpressionSyntax numberExpression)
                 return (int)numberExpression.LiteralToken.Value;
 
+            if(node is UnaryExpressionSyntax u)
+            {
+                var operand = EvaluateExpression(u.Operand);
+
+                if (u.OperatorToken.SyntaxKind == SyntaxKind.PlusToken)
+                    return operand;
+
+                else if (u.OperatorToken.SyntaxKind == SyntaxKind.MinusToken)
+                    return -operand;
+                else
+                    throw new Exception($"Unexpected unary operator {u.OperatorToken.SyntaxKind}");
+            }
+
             if (node is BinaryExpressionSyntax binaryExpression)
             {
                 var left = EvaluateExpression(binaryExpression.Left);

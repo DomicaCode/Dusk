@@ -22,6 +22,7 @@ namespace Dusk.CodeAnalysis.Syntax
         // Expressions
         LiteralExpression,
         BinaryExpression,
-        ParenthesizedExpression
+        ParenthesizedExpression,
+        UnaryExpression
     }
 }
