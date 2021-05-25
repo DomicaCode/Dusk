@@ -10,7 +10,7 @@ namespace Dusk.CodeAnalysis.ExpressionSyntax
             LiteralToken = literalToken;
         }
 
-        public override SyntaxKind SyntaxKind => SyntaxKind.NumberExpression;
+        public override SyntaxKind SyntaxKind => SyntaxKind.LiteralExpression;
 
         public SyntaxToken LiteralToken { get; }
 

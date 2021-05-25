@@ -20,7 +20,7 @@ namespace Dusk.CodeAnalysis.Syntax
         EndOfFileToken,
 
         // Expressions
-        NumberExpression,
+        LiteralExpression,
         BinaryExpression,
         ParenthesizedExpression
     }
