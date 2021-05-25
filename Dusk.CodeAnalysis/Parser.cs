@@ -22,7 +22,7 @@ namespace Dusk.CodeAnalysis
             SyntaxToken token;
             do
             {
-                token = lexer.NextToken();
+                token = lexer.Lex();
 
                 if (token.SyntaxKind != SyntaxKind.WhiteSpaceToken && token.SyntaxKind != SyntaxKind.BadToken)
                 {
